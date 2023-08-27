@@ -1,0 +1,184 @@
+.logo {
+    float: left;
+}
+
+body {
+    min-height: 100vh;
+    background: #111;
+    box-sizing: border-box;
+}
+
+/* Link to Cube Effect: https://www.youtube.com/watch?v=nOdDtnHWaDo */
+
+.cube {
+    position: fixed;
+    top: -100%;
+    right: -100%;
+    margin: auto;
+    z-index: 0;
+    left: 0px;
+    bottom: -220px;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: animate 4s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateX(-30deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+}
+
+.cube div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.cube div span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#151515, #8034ba);
+    transform: rotateY(calc(90deg*var(--i))) translateZ(150px);
+}
+
+.top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background: #222;
+    transform: rotateX(90deg) translateZ(150px);
+}
+
+.top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background: #b869f5;
+    transform: translateZ(-360px);
+    filter: blur(20px);
+    box-shadow: 0 0 120px rgba(169, 100, 222, 0.2),
+        0 0 200px rgba(169, 100, 222, 0.4),
+        0 0 300px rgba(169, 100, 222, 0.6),
+        0 0 400px rgba(169, 100, 222, 0.8),
+        0 0 400px rgba(169, 100, 222, 1);
+}
+
+.img {
+    position: relative;
+    left: 900px;
+    bottom: 100px;
+}
+
+.txt {
+    font-family: 'Libre Baskerville', serif;
+    color: #8034ba;
+    font-size: 100px;
+    position: relative;
+    bottom: -275px;
+}
+
+.but {
+    height: 200px;
+    /* position: relative; */
+    bottom: 200px;
+    text-align: center;
+}
+
+.button {
+    width: 200px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #8034ba;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Space Grotesk';
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    bottom: -200px;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: #8034ba;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 1.5s;
+}
+
+.button:hover::before {
+    width: 100%
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: lightcoral;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    transition: all 1.5s;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: #8034ba;
+}
+
+.topnav a.active {
+    background-color: wheat;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+
+.footer {
+    position: fixed;
+    bottom:-50px;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background-color: #8034ba;
+    color: white;
+    text-align: center;
+}
