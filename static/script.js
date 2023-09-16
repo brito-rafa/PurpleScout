@@ -14,7 +14,7 @@ function load() {
     var incButtons = document.getElementsByClassName("plus");
     for (var i = 0; i < incButtons.length; i++) {
         incButtons[i].onclick = function () {
-            // Get the next sibling element in the DOM tree
+            // Get the previous sibling element in the DOM tree
             var sibling = this.previousElementSibling;
             // Call the increase function with the button's id
             increase(sibling.id);
@@ -26,7 +26,7 @@ function load() {
     var decButtons = document.getElementsByClassName("min");
     for (var i = 0; i < decButtons.length; i++) {
         decButtons[i].onclick = function () {
-            // Get the previous sibling element in the DOM tree
+            // Get the next sibling element in the DOM tree
             var sibling = this.nextElementSibling;
             // Call the decrease function with the button's id
             decrease(sibling.id);
