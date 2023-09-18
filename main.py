@@ -19,6 +19,10 @@ def home():
 def scout():
     return render_template('scout.html')
 
+@app.route('/superScout.html')
+def superScout():
+    return render_template('superScout.html')
+
 # Submit
 @app.route('/submit.html', methods=['GET', 'POST'])
 def submit():
@@ -61,6 +65,39 @@ def submit():
 
             
     return render_template('submit.html')
+
+@app.route('/submit2.html', methods=['GET', 'POST'])
+def submit2():
+    print(f"got request via {request.method}")
+    if request.method == 'POST':
+        # print the data recieved from the form
+        for key, value in request.form.items():
+            print(f"{key}: {value}")
+
+        print(request.form.to_dict())
+
+        # append data to data/scout.csv
+        with open('data/superScout.csv', 'a') as f:
+            writer = csv.DictWriter(f, fieldnames=[
+                "num1red",
+                "num1blue",
+                "num2red",
+                "num2blue",
+                "num3red",
+                "num3blue",
+                "info"
+            ])
+            writer.writerow(request.form.to_dict())
+
+            f.close()
+
+        return redirect(url_for('submit2'))
+
+
+
+            
+    return render_template('submit2.html')
+
 
 # Run app  
 if __name__ == '__main__':
