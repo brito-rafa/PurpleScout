@@ -1,7 +1,13 @@
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background-color: #222;
+  color: #ffffff;
+}
+
 .str {
   position: relative;
   bottom: -120px;
-  font-family: "Space Grotesk";
+  font-family: 'Trebuchet MS', sans-serif;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
@@ -11,7 +17,7 @@
   position: relative;
   bottom: -120px;
   text-align: center;
-  font-family: "Space Grotesk";
+  font-family: 'Trebuchet MS', sans-serif;
   font-size: 20px;
 }
 
@@ -19,7 +25,7 @@
   position: relative;
   bottom: -10px;
   text-align: center;
-  font-family: "Space Grotesk";
+  font-family: 'Trebuchet MS', sans-serif;
   font-weight: bold;
   font-size: 25px;
 }
@@ -36,25 +42,23 @@
 .but {
   padding-bottom: 200px;
   text-align: center;
-
+  color: white;
 }
 
 .button {
   width: 200px;
   height: 80px;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: transparent;
-  border: 2px solid palevioletred;
-  color: #111;
+  border: 2px solid #663399;
+  text-decoration: none;
+  color: white;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Space Grotesk';
   cursor: pointer;
-  position: relative;
   overflow: hidden;
   position: relative;
-  bottom: -120px;
-
+  bottom: -200px;
 }
 
 .button::before {
@@ -62,45 +66,45 @@
   position: absolute;
   width: 0%;
   height: 100%;
-  background-color: palevioletred;
+  background-color: #663399;
+  color: white;
   top: 0;
   left: 0;
   z-index: -1;
-  transition: all 1.5s;
-
+  transition: all 1.0s;
 }
 
 .button:hover::before {
+  color: white;
   width: 100%
 }
 
-
 .topnav {
   overflow: hidden;
-  background-color: lightcoral;
-  border: 0;
+  background-color: #663399;
+  /* border: 0;
   padding: 0;
-  margin: 0;
+  margin: 0; */
 }
 
 .topnav a {
   float: left;
-  color: black;
+  color: #ddd;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 25px;
-  transition: all 1.5s;
+  transition: all 1.0s;
 }
 
 .topnav a:hover {
   background-color: #ddd;
-  color: #8034ba;
+  color: #663399;
 }
 
 .topnav a.active {
-  background-color: wheat;
-  color: black;
+  background-color: #ddd;
+  color: #663399;
 }
 
 ul {
@@ -119,7 +123,7 @@ li {
   width: 100%;
   height: 50px;
   font-size: 20px;
-  background-color: #8034ba;
+  background-color: #663399;
   color: white;
   text-align: center;
 }
@@ -159,13 +163,13 @@ li {
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
-  font-family: "Space Grotesk";
+  font-family: 'Trebuchet MS', sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 
 }
 
 .a {
-  background-color: #8034ba;
+  background-color: #663399;
   color: #ffffff;
 }
 
@@ -175,7 +179,7 @@ li {
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
-  font-family: "Space Grotesk";
+  font-family: 'Trebuchet MS', sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 
 }
@@ -191,13 +195,13 @@ li {
 }
 
 .tbl tbody tr:last-of-type {
-  border-bottom: 10px solid #8034ba;
+  border-bottom: 10px solid #663399;
   padding-bottom: 100px;
 }
 
 .tbl tbody tr.active-row {
   font-weight: bold;
-  color: #8034ba;
+  color: #663399;
 }
 
 
@@ -212,11 +216,11 @@ li {
 }
 
 .tbl2 tbody tr:last-of-type {
-  border-bottom: 10px solid #8034ba;
+  border-bottom: 10px solid #663399;
   padding-bottom: 100px;
 }
 
 .tbl2 tbody tr.active-row {
   font-weight: bold;
-  color: #8034ba;
+  color: #663399;
 }
