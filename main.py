@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+# Import Flask application
+from flask import Flask, render_template, request, redirect, url_for
+from flask_socketio import SocketIO, send, emit
 import csv
 
 # Create app
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 # Index
 @app.route('/')
@@ -99,6 +102,48 @@ def submit2():
     return render_template('submit2.html')
 
 
+#### Socket routes ####
+@socketio.on('echo') # test route
+def handle_echo(data):
+    print(f"received echo: {data}")
+    emit('echo', data)
+
+
+@socketio.on('getTeams') # activated when the super scout clicks the button to fetch teams
+def handle_fetchTeams(data):
+    # read data from data/teams.csv into a dictionary
+    matchNum = data['matchNum']
+    # get line of matchNum
+    with open('data/teams.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row['matchNum'] == matchNum:
+                # send data to super scout
+                emit('sendTeams', row)
+                return
+            
+    # if no matchNum found, send error
+    emit('sendTeams', {'red1': 'error', 'red2': 'error', 'red3': 'error', 'blue1': 'error', 'blue2': 'error', 'blue3': 'error'})
+
+
+
+# Both these routes bounce the data back to all the clients
+@socketio.on('scoutSelect') # activated when a scout chooses their team (red/blue and number)
+def handle_scoutSelect(data):
+    print(f"received scoutSelect: {data}")
+    emit('scoutSelect', data, broadcast=True)
+
+@socketio.on('scoutAssign') # activated when the super scout assigns the team# to scouts
+def handle_scoutAssign(data):
+    print(f"received scoutAssign: {data}")
+    emit('scoutAssign', data, broadcast=True)
+
+# disconnect
+@socketio.on('scouterDisconnect')
+def handle_scouterDisconnect(data):
+    emit('scoutAssign', data, broadcast=True) # tell the super scout, data contains the team id they had
+
+
 # Run app  
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    socketio.run(app, host='0.0.0.0', debug=True)
