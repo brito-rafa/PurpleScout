@@ -1,7 +1,9 @@
+// Connect to the super scout namespace, for super scout specific events
 var socket = io();
-socket.on('connect', function() {
-    socket.emit('my event', {data: 'I\'m connected!'});
-});
+
+//socket.on('connect', function() {
+    //socket.emit('my event', {data: 'I\'m connected!'});
+//});
 
 // super scouter knows status of each scout
 // socket.on('scouterReady', function(data) {
@@ -13,7 +15,9 @@ socket.on('connect', function() {
 // });
 
 // disable the start match button until teams are fetched
-$('#startMatch').prop('disabled', true);
+$('#sendInfo').prop('disabled', true);
+
+
 
 
 // Fetch teams button handler
@@ -39,9 +43,9 @@ socket.on('sendTeams', function(data) {
 
     // enable the start button if there is no error
     if (data.red1 != 'error') {
-        $('#startMatch').prop('disabled', false);
+        $('#sendInfo').prop('disabled', false);
     } else {
-        $('#startMatch').prop('disabled', true);
+        $('#sendInfo').prop('disabled', true);
     }
 });
 
@@ -55,14 +59,34 @@ socket.on('scoutSelect', function(data) {
     }
 });
 
-// start the match
-$('button#startMatch').click(function() {
+// send the match number and the teams numbers to the scouts
+$('button#sendInfo').click(function() {
+    console.log('sending info');
+    $('#sendInfo').text('Info sent!');
     socket.emit('scoutAssign', {
+        matchNum: $('#matchNum').val(),
         red1: $('#red1teamNum').text(),
         red2: $('#red2teamNum').text(),
         red3: $('#red3teamNum').text(),
         blue1: $('#blue1teamNum').text(),
         blue2: $('#blue2teamNum').text(),
         blue3: $('#blue3teamNum').text()
+    });
+    $('#red1Status').text('Scouting');
+    $('#red2Status').text('Scouting');
+    $('#red3Status').text('Scouting');
+    $('#blue1Status').text('Scouting');
+    $('#blue2Status').text('Scouting');
+    $('#blue3Status').text('Scouting');
+});
+
+// let the super scout know that the scouts have submitted (feature in testing)
+socket.on('scoutSubmit', function(data) {
+    console.log(data);
+    // Lookup the row in the table where data.teamNum is, and update the state of the scout to be 'done'
+    $('#scouterStatus tr').each(function() {
+        if ($(this).find('td:first').next().text() == data.teamNum) {
+            $(this).find('td:last').text('Done');
+        }
     });
 });

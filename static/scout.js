@@ -4,15 +4,12 @@ var socket = io();
 //const username = prompt('Enter your name: ');
 //socket.emit('scouterReady', {name: username});
 
-const assign = document.getElementById('assign');
+const assign = document.getElementById('preMatch');
 const waiting = document.getElementById('waiting');
 const form = document.getElementById('scoutForm');
 
 var selectedTeam = null;
 
-assign.style.display = 'block';
-waiting.style.display = 'none';
-form.style.display = 'none';
 
 // Team select handler
 $('button.teamSelect').click(function() {
@@ -49,15 +46,13 @@ socket.on('scoutSelect', function(data) {
 });
 
 
-// When the server tells us that a scouter is ready, log it
+// When the super scout gives the go ahead, start the match
 socket.on('scoutAssign', function(data) {
     console.log('Scouter ' + selectedTeam + ' is assigned to team ' + data[selectedTeam]);
-    alert("The super scout has started the match! You've been assigned to team " + data[selectedTeam] + ".");
-    // update ui
-    $('#preMatch').hide();
-    $('#scoutForm').show();
+    alert("The super scout has started match #" + data.matchNum + "! You are scouting " + selectedTeam + " and have been assigned to team #" + data[selectedTeam] + ".");
 
-    $('#teamNumSpan').text(data[selectedTeam] + " (" + selectedTeam.toUpperCase() + ")");
+    // update ui
     $('#teamNum').val(data[selectedTeam]);
+    $('#matchNum').val(data.matchNum);
 });
 

@@ -22,6 +22,7 @@ def home():
 def scout():
     return render_template('scout.html')
 
+# Super scout
 @app.route('/superScout.html')
 def superScout():
     return render_template('superScout.html')
@@ -31,15 +32,13 @@ def superScout():
 def submit():
     print(f"got request via {request.method}")
     if request.method == 'POST':
-        # print the data recieved from the form
-        #for key, value in request.form.items():
-            #print(f"{key}: {value}")
 
         print(request.form.to_dict())
 
         # append data to data/scout.csv
         with open('data/scout.csv', 'a') as f:
             writer = csv.DictWriter(f, fieldnames=[
+                "matchNum",
                 "teamNum",
                 "auto-high-cones",
                 "auto-high-cubes",
@@ -62,6 +61,10 @@ def submit():
 
             f.close()
 
+        # tell the super scout that a scout has submitted
+        #print(request.form.to_dict()['teamNum'])
+        socketio.emit('scoutSubmit', request.form.to_dict())
+
         return redirect(url_for('submit'))
 
 
@@ -69,6 +72,7 @@ def submit():
             
     return render_template('submit.html')
 
+# Super scout submit
 @app.route('/submit2.html', methods=['GET', 'POST'])
 def submit2():
     print(f"got request via {request.method}")
@@ -82,6 +86,7 @@ def submit2():
         # append data to data/scout.csv
         with open('data/superScout.csv', 'a') as f:
             writer = csv.DictWriter(f, fieldnames=[
+                "matchNum",
                 "num1red",
                 "num1blue",
                 "num2red",
@@ -126,7 +131,6 @@ def handle_fetchTeams(data):
     emit('sendTeams', {'red1': 'error', 'red2': 'error', 'red3': 'error', 'blue1': 'error', 'blue2': 'error', 'blue3': 'error'})
 
 
-
 # Both these routes bounce the data back to all the clients
 @socketio.on('scoutSelect') # activated when a scout chooses their team (red/blue and number)
 def handle_scoutSelect(data):
@@ -137,11 +141,6 @@ def handle_scoutSelect(data):
 def handle_scoutAssign(data):
     print(f"received scoutAssign: {data}")
     emit('scoutAssign', data, broadcast=True)
-
-# disconnect
-@socketio.on('scouterDisconnect')
-def handle_scouterDisconnect(data):
-    emit('scoutAssign', data, broadcast=True) # tell the super scout, data contains the team id they had
 
 
 # Run app  

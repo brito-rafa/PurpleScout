@@ -4,7 +4,8 @@
     <title>Scouter</title>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <link rel="stylesheet" href="static/style2.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="static/jquery.min.js"></script>
+    <script src="static/socketio.min.js"></script>
 </head>
 
 <body>
@@ -18,32 +19,41 @@
         </ul>
     </div>
 
-    <div id="preMatch">
+    <div id="teamSelect">
 
         <p>Select your assigned team:</p>
 
-        <div id="assign">
-            <button class="teamSelect" id="red1">Red 1</button>
-            <button class="teamSelect" id="red2">Red 2</button>
-            <button class="teamSelect" id="red3">Red 3</button>
-            <button class="teamSelect" id="blue1">Blue 1</button>
-            <button class="teamSelect" id="blue2">Blue 2</button>
-            <button class="teamSelect" id="blue3">Blue 3</button>
-        </div>
+        <button class="teamSelect" id="red1">Red 1</button>
+        <button class="teamSelect" id="red2">Red 2</button>
+        <button class="teamSelect" id="red3">Red 3</button>
+        <button class="teamSelect" id="blue1">Blue 1</button>
+        <button class="teamSelect" id="blue2">Blue 2</button>
+        <button class="teamSelect" id="blue3">Blue 3</button>
         <button class="teamSelect" id="deselect">Deselect</button>
 
-        <p id="waiting">You're scouting <b><span></span></b>. Waiting for super scout to start the match...</p>
+        <p id="waiting">You're scouting: <b><span></span></b></p>
 
     </div>
 
     <form id="scoutForm" action="/submit.html" method="POST" onsubmit="return download_csv_file(event)">
 
+        <!-- These are the two items that the super scout will control, but the user can type it in if it fails -->
         <div class="dropDown">
             <label>
-                <bold>YOU ARE WATCHING: <span id="teamNumSpan"></span></bold>
+                <bold>MATCH NUMBER: </bold>
             </label>
-            <input name="teamNum" class="inp hidden" id="teamNum" type="text" value="0" />
+            <input name="matchNum" class="inp" id="matchNum" type="text" value="0" />
         </div>
+
+        <div class="dropDown">
+            <label>
+                <bold>YOU ARE WATCHING: </bold>
+            </label>
+            <input name="teamNum" class="inp" id="teamNum" type="text" value="0" />
+        </div>
+        <!---------------------------->
+
+
         <table class="tbl">
             <thead>
                 <tr>
@@ -224,7 +234,6 @@
 
     
     <script src="static/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script src="static/scout.js"></script>
 </body>
 </html>
