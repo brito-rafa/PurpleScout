@@ -1,0 +1,23 @@
+{% extends "scout.html" %} 
+
+{% block form %}
+
+<!-- These are the two items that the super scout will control, but the user can type it in if it fails -->
+ <div class="dropDown">
+    <label>
+        <bold>MATCH NUMBER: </bold>
+    </label>
+    {{ form.matchNum(class_="inp") }}
+</div>
+
+<div class="dropDown">
+    <label>
+        <bold>YOU ARE WATCHING: </bold>
+    </label>
+    {{ form.teamNum(class_="inp") }}
+</div>
+
+Nothing yet!
+
+
+{% endblock %} 

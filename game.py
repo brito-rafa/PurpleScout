@@ -7,6 +7,8 @@ from wtforms import IntegerField, RadioField, TextAreaField
 from wtforms.validators import *
 
 class ChargedUpScoutForm(FlaskForm):
+    name = "Charged Up 2023"
+
     matchNum = IntegerField('matchNumber', validators=[DataRequired()])
     teamNum = IntegerField('teamNumber', validators=[DataRequired()])
 
@@ -37,5 +39,33 @@ class ChargedUpScoutForm(FlaskForm):
     ])
 
     droppedPieces = IntegerField('Dropped Pieces', validators=[DataRequired()])
+
+    info = TextAreaField('info', validators=[DataRequired()])
+
+class UltimateAscentScoutForm(FlaskForm):
+    name = "Ultimate Ascent 2013"
+
+    matchNum = IntegerField('matchNumber', validators=[DataRequired()])
+    teamNum = IntegerField('teamNumber', validators=[DataRequired()])
+
+    discsScored = IntegerField('discsScored', validators=[DataRequired()])
+    discsMissed = IntegerField('discsMissed', validators=[DataRequired()])
+
+    climb = RadioField('climb', validators=[DataRequired()], choices=[
+        (0, 'No climb'),
+        (1, 'First level'),
+        (2, 'Second level'),
+        (3, 'Third level'),
+    ])
+
+    info = TextAreaField('info', validators=[DataRequired()])
+
+class CrescendoForm(FlaskForm):
+    name = "Crescendo 2024"
+
+    matchNum = IntegerField('matchNumber', validators=[DataRequired()])
+    teamNum = IntegerField('teamNumber', validators=[DataRequired()])
+
+    ### Insert new fields here ###
 
     info = TextAreaField('info', validators=[DataRequired()])

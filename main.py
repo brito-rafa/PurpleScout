@@ -1,6 +1,6 @@
 # Import Flask application
 from flask import Flask, render_template, request, redirect, url_for
-from game import ChargedUpScoutForm
+from game import *
 from flask_socketio import SocketIO, send, emit
 import csv, secrets
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # Configure app
-app.config['FORM'] = ChargedUpScoutForm # Change this to the form you want to use
+app.config['FORM'] = CrescendoForm # Change this to the form you want to use
 app.config['SECRET_KEY'] = secrets.token_hex(16)
 
 # Index
@@ -20,7 +20,7 @@ def index():
 # Home
 @app.route('/home.html')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', name=app.config['FORM'].name)
 
 # Scout
 @app.route('/scout.html')
