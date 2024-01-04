@@ -2,6 +2,7 @@ body {
   font-family: 'Trebuchet MS', sans-serif;
   background-color: #222;
   color: #ffffff;
+  margin: 0;
 }
 
 .str {
@@ -148,6 +149,7 @@ li {
 /* Firefox */
 .inp[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Buttons to left/right of numbers */
@@ -234,4 +236,16 @@ li {
 
 .hidden {
   display: none;
+}
+
+.info {
+  font-family: 'Trebuchet MS', sans-serif;
+  width: 300px;
+  height: 100px;
+}
+
+#teamSelect {
+  /* center */
+  margin-left: 50px;
+  margin-top: 20px;
 }

@@ -62,6 +62,8 @@ Create a new HTML file in `templates/forms` with the same filename as your class
 ```
 Each `{{ form.field }}` will be replaced by an `<input>` element of the corresponding type. You can add classes like this: `form.field(class_="custom classes")` and style them in `scout.css`.
 
+You don't need to include a `<form>` wrapper or a submit button. If you want minus and plus buttons next to your integer inputs, add `<button class='subtractButton'>-</button>` and `<button class='addButton'>+</button>` before and after the `{{ form.field }}` line. The app will automatically add event listeners.
+
 ### 3. Configure main.py
 
 Change this line to the name of your class:
