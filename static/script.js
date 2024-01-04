@@ -10,8 +10,8 @@ function load() {
     }
 
 
-    // 2. Find all the buttons that have a class of "plus" and add an onclick event that calls the increase function
-    var incButtons = document.getElementsByClassName("plus");
+    // 2. Find all the buttons that have a class of "addButton" and add an onclick event that calls the increase function
+    var incButtons = document.getElementsByClassName("addButton");
     for (var i = 0; i < incButtons.length; i++) {
         incButtons[i].onclick = function () {
             // Get the previous sibling element in the DOM tree
@@ -23,7 +23,7 @@ function load() {
     }
 
     // 3. Do the same for decrease buttons
-    var decButtons = document.getElementsByClassName("min");
+    var decButtons = document.getElementsByClassName("subtractButton");
     for (var i = 0; i < decButtons.length; i++) {
         decButtons[i].onclick = function () {
             // Get the next sibling element in the DOM tree
@@ -181,7 +181,7 @@ function download_csv_file(event) {
 
 
 // unused repetitive code _________________________________________________________________________________________________________
-
+/*
 
 
 function inc() {
@@ -420,5 +420,5 @@ function decThree() {
 }
 
 
-
+*/
 

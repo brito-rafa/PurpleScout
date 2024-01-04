@@ -1,11 +1,16 @@
 # Import Flask application
 from flask import Flask, render_template, request, redirect, url_for
+from game import ChargedUpScoutForm
 from flask_socketio import SocketIO, send, emit
-import csv
+import csv, secrets
 
 # Create app
 app = Flask(__name__)
 socketio = SocketIO(app)
+
+# Configure app
+app.config['FORM'] = ChargedUpScoutForm # Change this to the form you want to use
+app.config['SECRET_KEY'] = secrets.token_hex(16)
 
 # Index
 @app.route('/')
@@ -20,61 +25,42 @@ def home():
 # Scout
 @app.route('/scout.html')
 def scout():
-    return render_template('scout.html')
+    form = app.config['FORM']()
+    return render_template('forms/' + app.config['FORM'].__name__ + '.html', form=form)
 
 # Super scout
 @app.route('/superScout.html')
 def superScout():
     return render_template('superScout.html')
 
-# Submit
-@app.route('/submit.html', methods=['GET', 'POST'])
-def submit():
+# Normal scout submit
+@app.route('/scoutSubmit.html', methods=['GET', 'POST'])
+def scoutSubmit():
     print(f"got request via {request.method}")
     if request.method == 'POST':
 
-        print(request.form.to_dict())
+        data = request.form.to_dict()
 
         # append data to data/scout.csv
-        with open('data/scout.csv', 'a') as f:
-            writer = csv.DictWriter(f, fieldnames=[
-                "matchNum",
-                "teamNum",
-                "auto-high-cones",
-                "auto-high-cubes",
-                "auto-mid-cones",
-                "auto-mid-cubes",
-                "auto-low-cones",
-                "auto-low-cubes",
-                "teleop-high-cones",
-                "teleop-high-cubes",
-                "teleop-mid-cones",
-                "teleop-mid-cubes",
-                "teleop-low-cones",
-                "teleop-low-cubes",
-                "defense",
-                "sub",
-                "dropped-pieces",
-                "info"
-            ])
-            writer.writerow(request.form.to_dict())
+        with open('data/scout.csv', 'a', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=list(data.keys()))
+            writer.writerow(data)
 
             f.close()
 
+        print(data)
+
         # tell the super scout that a scout has submitted
         #print(request.form.to_dict()['teamNum'])
-        socketio.emit('scoutSubmit', request.form.to_dict())
+        socketio.emit('scoutSubmit', data)
 
-        return redirect(url_for('submit'))
+        return redirect(url_for('scoutSubmit'))
 
-
-
-            
-    return render_template('submit.html')
+    return render_template('scoutSubmit.html')
 
 # Super scout submit
-@app.route('/submit2.html', methods=['GET', 'POST'])
-def submit2():
+@app.route('/superScoutSubmit.html', methods=['GET', 'POST'])
+def superScoutSubmit():
     print(f"got request via {request.method}")
     if request.method == 'POST':
         # print the data recieved from the form
@@ -101,9 +87,6 @@ def submit2():
 
         return redirect(url_for('submit2'))
 
-
-
-            
     return render_template('submit2.html')
 
 
@@ -119,7 +102,7 @@ def handle_fetchTeams(data):
     # read data from data/teams.csv into a dictionary
     matchNum = data['matchNum']
     # get line of matchNum
-    with open('data/teams.csv', 'r') as f:
+    with open('data/matchList.csv', 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
             if row['matchNum'] == matchNum:
@@ -141,7 +124,6 @@ def handle_scoutSelect(data):
 def handle_scoutAssign(data):
     print(f"received scoutAssign: {data}")
     emit('scoutAssign', data, broadcast=True)
-
 
 # Run app  
 if __name__ == '__main__':

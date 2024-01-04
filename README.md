@@ -35,10 +35,10 @@ class ChargedUpScoutForm(FlaskForm):
       (2,'Good defense')
     ], validators=[DataRequired()])
 
-    comment = StringField('Comment', validators=[DataRequired()])
+    comment = TextAreaField('Comment', validators=[DataRequired()])
 ```
 
-Most fields you need will be of type `IntegerField`, `RadioField`, or `StringField`. Refer to WTForms and Flask-WTF documentation for more information.
+Most fields you need will be of type `IntegerField`, `RadioField`, or `TextAreaField`. Refer to WTForms and Flask-WTF documentation for more information.
 
 ### 2. Create template in `templates/forms`
 
@@ -46,7 +46,7 @@ Create a new HTML file in `templates/forms` with the same filename as your class
 
 ```html
 <!-- ChargedUpScoutForm.html -->
-{% extends scout.html %}
+{% extends "scout.html" %}
 {% block form %}
 
 {{ form.matchNum }}
