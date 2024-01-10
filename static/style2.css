@@ -6,25 +6,28 @@ body {
 }
 
 .str {
-  position: relative;
-  bottom: -120px;
+  margin-top: 40px;
+  margin-bottom: 25px;
   font-family: 'Trebuchet MS', sans-serif;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
 }
 
+.str p {
+  display: inline-block;
+  border-bottom: 5px solid #663399;
+  margin: 0; /* Remove default margin */
+  padding: 3px 0; /* Add padding for spacing */
+}
+
 .quest {
-  position: relative;
-  bottom: -120px;
   text-align: center;
   font-family: 'Trebuchet MS', sans-serif;
   font-size: 20px;
 }
 
 .dropDown {
-  position: relative;
-  bottom: -10px;
   text-align: center;
   font-family: 'Trebuchet MS', sans-serif;
   font-weight: bold;
@@ -115,7 +118,8 @@ ul {
 }
 
 li {
-  display: inline;
+  margin-bottom: 5px;
+  accent-color: #663399;
 }
 
 .footer {
@@ -129,13 +133,30 @@ li {
   text-align: center;
 }
 
+/* Number inputs */
 
 .inp {
-  width: 80px;
+  width: 40px;
   height: 30px;
   font-size: 25px;
   text-align: center;
+  accent-color: #663399;
 }
+
+input.inp.wide {
+  width: 80px;
+}
+
+input.inp.check {
+  width: 100%;
+}
+
+select.inp.select {
+  width: 100%;
+  font-size: 20px;
+}
+
+
 
 /* Hide arrows on number input */
 
@@ -167,8 +188,7 @@ li {
 
 
 .tbl {
-  position: relative;
-  bottom: -50px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
@@ -180,17 +200,6 @@ li {
 .a {
   background-color: #663399;
   color: #ffffff;
-}
-
-.tbl2 {
-  position: relative;
-  bottom: -100px;
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: collapse;
-  font-family: 'Trebuchet MS', sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-
 }
 
 .tbl th,

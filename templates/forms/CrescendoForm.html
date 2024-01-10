@@ -7,17 +7,176 @@
     <label>
         <bold>MATCH NUMBER: </bold>
     </label>
-    {{ form.matchNum(class_="inp") }}
+    {{ form.matchNum(class_="inp wide") }}
 </div>
 
 <div class="dropDown">
     <label>
         <bold>YOU ARE WATCHING: </bold>
     </label>
-    {{ form.teamNum(class_="inp") }}
+    {{ form.teamNum(class_="inp wide") }}
 </div>
 
-Nothing yet!
+<!-- Autonomous  -->
+
+<table class="tbl">
+    <thead>
+        <tr>
+            <th style="font-size: 20px;" class="a" colspan="3">
+                <center>AUTONOMOUS</center>
+            </th>
+        </tr>
+        <tr>
+            <th style="font-size: 25px;">
+                <center>MOBILITY</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>AMP</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>SPEAKER</center>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="active">
+            <td>
+                {{ form.autoMobility(class="inp check") }}
+            </td>
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.autoAmp(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+            
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.autoSpeaker(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Teleop  -->
+<table class="tbl">
+    <thead>
+        <tr>
+            <th style="font-size: 20px;" class="a" colspan="3">
+                <center>TELEOP</center>
+            </th>
+        </tr>
+        <tr>
+            <th style="font-size: 25px;">
+                <center>AMP</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>SPEAKER</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>AMPLIFIED</center>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="active">
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.teleopAmp(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.teleopSpeaker(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.teleopAmplified(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+        </tr>
+    </tbody>
+    
+</table>
+
+<!-- Endgame  -->
+<table class="tbl">
+    <thead>
+        <tr>
+            <th style="font-size: 20px;" class="a" colspan="3">
+                <center>ENDGAME</center>
+            </th>
+        </tr>
+        <tr>
+            <th style="font-size: 25px;">
+                <center>CLIMB</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>TRAP</center>
+            </th>
+            <th style="font-size: 25px;">
+                <center>SPOTLIGHT</center>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="active">
+            <td>
+                {{ form.climb(class="inp select") }}
+            </td>
+            <td>
+                <button type="button" class="subtractButton">-</button>
+                {{ form.trap(class="inp") }}
+                <button type="button" class="addButton">+</button>
+            </td>
+            <td>
+                {{ form.spotlight(class="inp check") }}
+            </td>
+        </tr>
+    </tbody>
+    
+</table>
+
+<!-- Other -->
+<div class="str">
+    <p>DROPPED PIECES</p>
+</div>
+<div class="quest">
+    <button type="button" class="subtractButton">-</button>
+    {{ form.droppedPieces(class="inp") }}
+    <button type="button" class="addButton">+</button>
+</div>
+
+<div class="str">
+    <p>DEFENSE QUALITY</p>
+</div>
+<div class="quest">
+    <div class="inner">    
+            {{ form.defense }}
+    </div>
+</div>
+
+<div class="str">
+    <p>INTAKE TYPE</p>
+</div>
+<div class="quest">
+    <div class="inner">    
+            {{ form.intake }}
+    </div>
+</div>
+
+<div class="str">
+    <p>ADDITIONAL INFO</p>
+</div>
+<div class="quest">
+    <div class="inner2">
+
+        {{ form.info(class="info") }}
+    </div>
+</div>
+
 
 
 {% endblock %} 

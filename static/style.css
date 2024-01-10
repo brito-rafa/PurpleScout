@@ -92,7 +92,7 @@ body {
 .txt {
   
   position: relative;
-  bottom: -275px;
+  bottom: -325px;
   text-align: center;
 }
 
@@ -122,7 +122,7 @@ body {
   cursor: pointer;
   overflow: hidden;
   position: relative;
-  bottom: -250px;
+  bottom: -300px;
 }
 
 .button::before {
