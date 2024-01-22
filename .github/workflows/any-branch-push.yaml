@@ -1,10 +1,13 @@
-name: main
+name: any-branch-push
 
 on:
   push:
     branches:
-    - v1
-    - main
+    - '*/*'
+    - '*'
+    - '**'
+    - '!v1'
+    - '!main'
 
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
@@ -15,7 +18,7 @@ env:
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
 
-  build-and-push-main-image:
+  build-and-push-image-non-main:
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
@@ -41,7 +44,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: latest=true
+          flavor: latest=false
           tags: type=sha
 
       - name: Set up QEMU
